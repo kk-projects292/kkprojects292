@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order History - ShopKing</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <h1>ShopKing</h1>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="cart.html">Cart (<span id="cart-count">0</span>)</a></li>
+                    <li><a href="orders.html" class="active">Orders</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="orders-header">
+                <h1 class="page-title">Order History</h1>
+                <button class="btn btn-primary" id="export-pdf-btn" onclick="exportOrdersToPDF()">Export All Orders to PDF</button>
+            </div>
+            <div class="orders-container" id="orders-container">
+                <!-- Orders will be inserted here -->
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 ShopKing. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/orders.js"></script>
+    <script>
+        // Require authentication for orders page
+        if (typeof requireAuth === 'function') {
+            requireAuth();
+        }
+
+        function displayOrders() {
+            const orders = getOrders();
+            const container = document.getElementById('orders-container');
+
+            if (orders.length === 0) {
+                container.innerHTML = '<p class="empty-orders">No orders yet. <a href="index.html">Start shopping</a></p>';
+                return;
+            }
+
+            // Sort orders by date (newest first)
+            const sortedOrders = orders.sort((a, b) => new Date(b.orderDate) - new Date(a.orderDate));
+
+            let ordersHtml = '<div class="orders-list">';
+            sortedOrders.forEach(order => {
+                ordersHtml += `
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div>
+                                <h3>Order #${order.orderId}</h3>
+                                <p class="order-date">${new Date(order.orderDate).toLocaleString()}</p>
+                            </div>
+                            <div class="order-total-badge">
+                                <span>$${order.totalPrice.toFixed(2)}</span>
+                            </div>
+                        </div>
+                        <div class="order-details">
+                            <div class="order-customer-info">
+                                <p><strong>Customer:</strong> ${order.customerName}</p>
+                                <p><strong>Email:</strong> ${order.email}</p>
+                                <p><strong>Phone:</strong> ${order.phone}</p>
+                                <p><strong>Address:</strong> ${order.address}</p>
+                            </div>
+                            <div class="order-items-list">
+                                <h4>Items:</h4>
+                                <ul>
+                                    ${order.items.map(item => `<li>${item.name} - Qty: ${item.quantity} × $${item.price.toFixed(2)} = $${(item.quantity * item.price).toFixed(2)}</li>`).join('')}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            ordersHtml += '</div>';
+            container.innerHTML = ordersHtml;
+        }
+
+        // Initialize
+        displayOrders();
+        updateCartCount();
+    </script>
+</body>
+</html>
+

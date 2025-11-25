@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - ShopKing</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <h1>ShopKing</h1>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="cart.html" class="active">Cart (<span id="cart-count">0</span>)</a></li>
+                    <li><a href="orders.html">Orders</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1 class="page-title">Shopping Cart</h1>
+            <div class="cart-container">
+                <div class="cart-items" id="cart-items">
+                    <!-- Cart items will be inserted here -->
+                </div>
+                <div class="cart-summary" id="cart-summary">
+                    <!-- Cart summary will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 ShopKing. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/product-data.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
+    <script>
+        function displayCart() {
+            const cart = getCart();
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartSummaryContainer = document.getElementById('cart-summary');
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p class="empty-cart">Your cart is empty. <a href="index.html">Continue shopping</a></p>';
+                cartSummaryContainer.innerHTML = '';
+                return;
+            }
+
+            let total = 0;
+            let itemsHtml = '';
+
+            cart.forEach(item => {
+                const product = products.find(p => p.id === item.productId);
+                if (product) {
+                    const itemTotal = item.price * item.quantity;
+                    total += itemTotal;
+                    itemsHtml += `
+                        <div class="cart-item">
+                            <img src="${product.image}" alt="${product.name}">
+                            <div class="cart-item-info">
+                                <h3><a href="product-detail.html?id=${product.id}">${product.name}</a></h3>
+                                <p class="cart-item-category">${product.category}</p>
+                                <p class="cart-item-price">$${item.price.toFixed(2)} each</p>
+                            </div>
+                            <div class="cart-item-controls">
+                                <div class="quantity-selector">
+                                    <button class="qty-btn" onclick="updateCartQuantity(${item.productId}, ${item.quantity - 1})">-</button>
+                                    <span class="qty-value">${item.quantity}</span>
+                                    <button class="qty-btn" onclick="updateCartQuantity(${item.productId}, ${item.quantity + 1})">+</button>
+                                </div>
+                                <p class="cart-item-total">$${itemTotal.toFixed(2)}</p>
+                                <button class="btn btn-danger" onclick="removeFromCart(${item.productId})">Remove</button>
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+
+            cartItemsContainer.innerHTML = itemsHtml;
+            cartSummaryContainer.innerHTML = `
+                <div class="summary-card">
+                    <h2>Order Summary</h2>
+                    <div class="summary-row">
+                        <span>Subtotal:</span>
+                        <span>$${total.toFixed(2)}</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Shipping:</span>
+                        <span>Free</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total:</span>
+                        <span>$${total.toFixed(2)}</span>
+                    </div>
+                    <a href="checkout.html" class="btn btn-primary btn-block">Proceed to Checkout</a>
+                </div>
+            `;
+        }
+
+        function updateCartQuantity(productId, newQuantity) {
+            if (newQuantity < 1) {
+                removeFromCart(productId);
+                return;
+            }
+            if (newQuantity > 10) {
+                alert('Maximum quantity is 10');
+                return;
+            }
+            updateCartItemQuantity(productId, newQuantity);
+            displayCart();
+            updateCartCount();
+        }
+
+        function removeFromCart(productId) {
+            removeCartItem(productId);
+            displayCart();
+            updateCartCount();
+        }
+
+        // Initialize cart display
+        displayCart();
+        updateCartCount();
+    </script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - ShopKing</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <h1>ShopKing</h1>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="cart.html">Cart (<span id="cart-count">0</span>)</a></li>
+                    <li><a href="orders.html">Orders</a></li>
+                    <li><a href="login.html">Login</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="auth-container">
+                <div class="auth-card">
+                    <h2>Create Your Account</h2>
+                    <form id="register-form">
+                        <div class="form-group">
+                            <label for="register-name">Full Name *</label>
+                            <input type="text" id="register-name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-email">Email *</label>
+                            <input type="email" id="register-email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-password">Password *</label>
+                            <input type="password" id="register-password" name="password" required minlength="6">
+                            <small class="form-help">Password must be at least 6 characters long</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-confirm-password">Confirm Password *</label>
+                            <input type="password" id="register-confirm-password" name="confirmPassword" required>
+                        </div>
+                        <div id="register-error" class="error-message"></div>
+                        <div id="register-success" class="success-message"></div>
+                        <button type="submit" class="btn btn-primary btn-block">Register</button>
+                        <p class="auth-link">
+                            Already have an account? <a href="login.html">Login here</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 ShopKing. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
+    <script>
+        // Update cart count on page load
+        if (typeof updateCartCount === 'function') {
+            updateCartCount();
+        }
+
+        // Handle register form submission
+        document.getElementById('register-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('register-name').value;
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+            const confirmPassword = document.getElementById('register-confirm-password').value;
+            const errorDiv = document.getElementById('register-error');
+            const successDiv = document.getElementById('register-success');
+
+            // Clear previous messages
+            errorDiv.textContent = '';
+            errorDiv.style.display = 'none';
+            successDiv.textContent = '';
+            successDiv.style.display = 'none';
+
+            // Validate passwords match
+            if (password !== confirmPassword) {
+                errorDiv.textContent = 'Passwords do not match.';
+                errorDiv.style.display = 'block';
+                return;
+            }
+
+            // Validate password length
+            if (password.length < 6) {
+                errorDiv.textContent = 'Password must be at least 6 characters long.';
+                errorDiv.style.display = 'block';
+                return;
+            }
+
+            // Register user - data is stored in localStorage as JSON
+            if (registerUser(name, email, password)) {
+                successDiv.textContent = 'Registration successful! Your data has been saved. Redirecting to login...';
+                successDiv.style.display = 'block';
+                // Log to console for verification
+                console.log('User registered successfully. Data stored in localStorage.');
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 1500);
+            } else {
+                errorDiv.textContent = 'Email already exists. Please use a different email or login.';
+                errorDiv.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
+

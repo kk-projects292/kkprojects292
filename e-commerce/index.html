@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Store - Home</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <h1>ShopKing</h1>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="cart.html">Cart (<span id="cart-count">0</span>)</a></li>
+                    <li><a href="orders.html">Orders</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h2>Welcome to ShopKing</h2>
+                <p>Discover amazing products at great prices</p>
+            </div>
+        </section>
+
+        <section class="featured-products">
+            <div class="container">
+                <h2>Featured Products</h2>
+                <div class="product-slider">
+                    <button class="slider-btn prev" id="prev-btn">&#8249;</button>
+                    <div class="slider-container" id="featured-slider">
+                        <!-- Featured products will be inserted here -->
+                    </div>
+                    <button class="slider-btn next" id="next-btn">&#8250;</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="products-section">
+            <div class="container">
+                <div class="search-filter-bar">
+                    <input type="text" id="search-input" placeholder="Search products..." class="search-input">
+                    <div class="category-filters">
+                        <button class="filter-btn active" data-category="all">All</button>
+                        <button class="filter-btn" data-category="Electronics">Electronics</button>
+                        <button class="filter-btn" data-category="Clothing">Clothing</button>
+                        <button class="filter-btn" data-category="Books">Books</button>
+                        <button class="filter-btn" data-category="Home & Garden">Home & Garden</button>
+                    </div>
+                </div>
+                <div class="products-grid" id="products-grid">
+                    <!-- Products will be inserted here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 ShopKing. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/product-data.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
