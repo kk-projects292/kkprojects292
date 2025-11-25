@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kirenkumar R - Resume</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f0f0;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .resume-container {
+            background: white;
+            max-width: 900px;
+            margin: 0 auto;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .resume-actions {
+            background: linear-gradient(135deg, #4567ff 0%, #6e43d4 100%);
+            padding: 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .resume-actions button {
+            background: white;
+            color: #667eea;
+            border: none;
+            padding: 12px 30px;
+            margin: 0 10px;
+            font-size: 1em;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .resume-actions button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .resume-actions button:active {
+            transform: translateY(0);
+        }
+
+        .resume-actions button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .resume-content {
+            padding: 50px;
+            font-family: 'Calibri', Arial, sans-serif;
+            line-height: 1.6;
+            color: #000;
+        }
+
+        .name {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            letter-spacing: 3px;
+        }
+
+        .title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .contact-info {
+            font-size: 11pt;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .section-divider {
+            border-bottom: 2px solid #000;
+            margin: 25px 0;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            color: #000;
+        }
+
+        .content {
+            font-size: 11pt;
+            margin-bottom: 12px;
+            color: #333;
+        }
+
+        .skill-label {
+            font-weight: bold;
+            display: inline;
+        }
+
+        .project-title {
+            font-size: 13pt;
+            font-weight: bold;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            color: #000;
+        }
+
+        .bullet-point {
+            margin-left: 25px;
+            margin-bottom: 10px;
+            font-size: 11pt;
+            color: #333;
+        }
+
+        .education-title {
+            font-weight: bold;
+            font-size: 12pt;
+            color: #000;
+        }
+
+        @media print {
+            .resume-actions {
+                display: none;
+            }
+
+            .resume-content {
+                padding: 20px;
+            }
+
+            body {
+                background: white;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .resume-content {
+                padding: 30px 20px;
+            }
+
+            .name {
+                font-size: 28px;
+            }
+
+            .resume-actions button {
+                padding: 10px 20px;
+                font-size: 0.9em;
+                margin: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="resume-container">
+        <div class="resume-actions">
+            <button onclick="downloadPDF()">📥 Download Resume (PDF)</button>
+            <button onclick="goBack()">← Back to Portfolio</button>
+        </div>
+
+        <div class="resume-content" id="resumeContent">
+            <div class="name">KIRENKUMAR R</div>
+            <div class="title">Full Stack Developer</div>
+            <div class="contact-info">
+                Sivaganga District, Tamil Nadu, India<br>
+                Email: kirenkumar.dev424@gmail.com<br>
+                LinkedIn: linkedin.com/in/kirenkumar-dev424<br>
+                Portfolio: kirenkumarr.netlify.app
+            </div>
+
+            <div class="section-divider"></div>
+
+            <div class="section-title">PROFESSIONAL SUMMARY</div>
+            <div class="content">
+                Passionate Full Stack Developer with expertise in building modern web applications using the MERN stack.
+                Skilled in creating seamless user experiences and solving complex problems through clean, efficient, and
+                scalable code. Strong foundation in both frontend and backend technologies with a commitment to
+                continuous learning and staying current with industry trends.
+            </div>
+
+            <div class="section-divider"></div>
+
+            <div class="section-title">TECHNICAL SKILLS</div>
+            <div class="content">
+                <div class="skill-label">Frontend Development:</div> HTML5, CSS3, JavaScript (ES6+), React.js
+            </div>
+            <div class="content">
+                <div class="skill-label">Backend Development:</div> Node.js, Express.js
+            </div>
+            <div class="content">
+                <div class="skill-label">Database:</div> MySQL, MongoDB
+            </div>
+            <div class="content">
+                <div class="skill-label">Programming Languages:</div> JavaScript, Python
+            </div>
+            <div class="content">
+                <div class="skill-label">AI Tools:</div> Cursor AI, Lovable AI, Gamma AI, I Love PDF, Antigravity AI
+            </div>
+            <div class="content">
+                <div class="skill-label">Development Tools:</div> VS Code, Git, GitHub, Postman, RESTful APIs
+            </div>
+            <div class="content">
+                <div class="skill-label">Design Tools:</div> Figma, Canva
+            </div>
+            <div class="content">
+                <div class="skill-label">CMS & Other Tools:</div> WordPress
+            </div>
+            <div class="content">
+                <div class="skill-label">Core Competencies:</div> Problem Solving, Full Stack Development, MERN Stack,
+                Responsive Web Design
+            </div>
+
+            <div class="section-divider"></div>
+
+            <div class="section-title">EDUCATION</div>
+            <div class="education-title">Bachelor's Degree in Computer Science</div>
+            <div class="content">
+                SINGAI SITHAR AYYA COLLEGE OF ARTS AND SCIENCE, A.THEKKUR<br>
+                Expected Graduation: 2026 | Duration: 2023 - 2026
+            </div>
+
+            <div class="section-divider"></div>
+
+            <div class="section-title">PROJECTS</div>
+
+            <div class="project-title">ShopKing - E-Commerce Platform</div>
+            <div class="bullet-point">• Developed a user-friendly e-commerce platform to facilitate seamless online
+                shopping experiences</div>
+            <div class="bullet-point">• Implemented modern web technologies to create an intuitive and responsive
+                interface</div>
+            <div class="bullet-point">• Designed and built features to enhance customer engagement and streamline the
+                purchasing process</div>
+            <div class="bullet-point">• Technologies Used: HTML, CSS, JavaScript</div>
+
+            <div class="project-title">Currency Converter</div>
+            <div class="bullet-point">• Built a real-time currency converter application with live exchange rate updates
+            </div>
+            <div class="bullet-point">• Implemented RESTful API integration to fetch current conversion rates from
+                external sources</div>
+            <div class="bullet-point">• Designed responsive user interface for seamless conversion across multiple
+                currencies</div>
+            <div class="bullet-point">• Created backend logic to handle API requests and process conversion calculations
+                efficiently</div>
+            <div class="bullet-point">• Technologies Used: HTML, CSS, JavaScript, Node.js</div>
+
+            <div class="project-title">Additional Projects</div>
+            <div class="bullet-point">• Developed multiple web applications demonstrating proficiency in full stack
+                development</div>
+            <div class="bullet-point">• Created responsive and dynamic user interfaces using modern frontend frameworks
+            </div>
+            <div class="bullet-point">• Implemented server-side logic and database integration for scalable applications
+            </div>
+            <div class="bullet-point">• Applied best practices in code organization, version control, and web
+                development standards</div>
+
+            <div class="section-divider"></div>
+
+            <div class="section-title">KEY STRENGTHS</div>
+            <div class="bullet-point">• Strong problem-solving abilities</div>
+            <div class="bullet-point">• Full stack web development expertise</div>
+            <div class="bullet-point">• MERN stack proficiency</div>
+            <div class="bullet-point">• Server-side architecture design</div>
+            <div class="bullet-point">• Clean and efficient code writing</div>
+            <div class="bullet-point">• Continuous learning mindset</div>
+            <div class="bullet-point">• Team collaboration skills</div>
+            <div class="bullet-point">• Strong communication abilities</div>
+
+            <div class="section-divider"></div>
+
+            <div class="section-title">PROFESSIONAL INTERESTS</div>
+            <div class="bullet-point">• Full Stack Web Development</div>
+            <div class="bullet-point">• Modern JavaScript Frameworks</div>
+            <div class="bullet-point">• Database Design & Optimization</div>
+            <div class="bullet-point">• User Experience Design</div>
+            <div class="bullet-point">• Problem Solving & Algorithms</div>
+            <div class="bullet-point">• Emerging Web Technologies</div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <script>
+        function goBack() {
+            // This will take the user back to the previous page (your portfolio)
+            window.history.back();
+        }
+
+        async function downloadPDF() {
+            const button = event.target;
+            const originalText = button.textContent;
+            button.textContent = '⏳ Generating PDF...';
+            button.disabled = true;
+
+            try {
+                const { jsPDF } = window.jspdf;
+                const element = document.getElementById('resumeContent');
+
+                const canvas = await html2canvas(element, {
+                    scale: 2,
+                    useCORS: true,
+                    logging: false,
+                    backgroundColor: '#ffffff'
+                });
+
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF({
+                    orientation: 'portrait',
+                    unit: 'mm',
+                    format: 'a4'
+                });
+
+                const imgWidth = 210; // A4 width in mm
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+                let heightLeft = imgHeight;
+                let position = 0;
+
+                pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                heightLeft -= 297; // A4 height in mm
+
+                while (heightLeft > 0) {
+                    position = heightLeft - imgHeight;
+                    pdf.addPage();
+                    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                    heightLeft -= 297;
+                }
+
+                pdf.save('Kirenkumar_R_Resume.pdf');
+
+                button.textContent = '✓ Downloaded Successfully!';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.disabled = false;
+                }, 2000);
+            } catch (error) {
+                console.error('Error generating PDF:', error);
+                button.textContent = '❌ Error - Try Again';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.disabled = false;
+                }, 2000);
+            }
+        }
+    </script>
+</body>
+
+</html>
